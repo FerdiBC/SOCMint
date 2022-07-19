@@ -1,7 +1,5 @@
-
 git+https://github.com/twintproject/twint
 numpy
-re
 pandas
 streamlit
 datetime
