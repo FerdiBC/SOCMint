@@ -2,7 +2,4 @@ git+https://github.com/twintproject/twint
 numpy
 pandas
 streamlit
-datetime
-requests
-json
 certifi
