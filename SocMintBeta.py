@@ -1,4 +1,5 @@
 import twint as tw
+import twint as tw
 import numpy as np
 import re
 import pandas as pd
@@ -7,6 +8,7 @@ import datetime
 import requests
 import json
 import certifi
+import plotly.graph_objects as go
 
 
 def setupTWINT(keyword):
@@ -161,7 +163,7 @@ def setupStopwords():
     itsecStop = ["cyber", "threat", "threats", "vulnerabilities", "false", "zero", "itsecurity", "update", "network",
                  "hacker", "check","inkhallows","initiative","en","watch","hope","la","man","execution",
                  "security", "vulnerability", "zeroday", "0day", "patchday", "itsec", "itsecurity", "networksecurity",
-                 "cyberattack", "cyberattacks","coming", "andre","art","crypto","best","amazing",
+                 "cyberattack", "cyberattacks","coming", "andre","art","crypto","best","amazing","better","don","morning","lol","business",
                  "agnostic", "intelligence", "precrime", "domain", "siem", "code", "code", "join", "anonymous", "kako",
                  "patch tuesday",
                  "hacktivist", "exploit", "predicted", "https", "http", "near", "youtube", "critical", "people",
@@ -192,7 +194,7 @@ def setupStopwords():
                  "exploits", "day", "0", "-", "alleviate", "burden", "storyline",
                 "avg", "response", "amp", "deaths", "attacks", "teams", "week", "ago", "urges", "raw", "predator",
                 "flaws", "list", "adds", "xr", "ios", "agency", "us", "fest"
-    , "hacked", "safari", "pwn", "webcast", "mass", "shooting"]
+    , "hacked", "safari", "pwn", "webcast", "mass", "shooting","shit",]
     stopwords.extend(itsecStop)
     return stopwords
 
@@ -263,9 +265,9 @@ def getJSONInfo(cvecode):
         if "result" in data:
             return str([data["result"]["CVE_Items"][0]["cve"]["description"]["description_data"][0]["value"]])
         else:
-            return st.write(data)
+            return
     except json.decoder.JSONDecodeError:
-            return 
+            return
 
 
 def getCVEOutput():
@@ -281,21 +283,11 @@ def getCVEOutput():
             topListcve.append(x[0])
             topcveDescription.append(getJSONInfo(x[0]))
     cveDict = pd.DataFrame(zip(topListcve, topcveDescription))
-    print(topListcve)
-    print(topcveDescription)
-    print(cveDict)
     cveDF = pd.DataFrame(cveDict)
     cveDF.columns = ["CVE ID", "Description"]
     return (cveDF)
 
 
-def setupStreamlit():
-    st.subheader('''Cyber Trends''')
-    col1, col2 = st.columns(2)
-    col3 = st.columns(1)
-    col1.subheader("chart")
-    col2.subheader("Last 7 days")
-    st.subheader("CVEs")
 
 
 def useCSV():
@@ -306,13 +298,25 @@ def useCSV():
 
 
 # start
-
 st.set_page_config(layout="wide")
-st.subheader('''Cyber Trends''')
 col1, col2 = st.columns(2)
 col3 = st.columns(1)
+
+st.subheader('''Cyber Trends''')
 col1.subheader("chart")
 col2.subheader("Last 7 days")
+
+col4, col5 = st.columns(2)
+with col4:
+    with st.form(key="Stopword_Form"):
+        newStop = st.text_input("Add new Stopword: ")
+        submitButtonStop = st.form_submit_button(label="Add")
+
+with col5:
+    with st.form(key="Keyword"):
+        newKeyword = st.text_input("Search for specific Term ")
+        submitButtonKw = st.form_submit_button(label="Search")
+
 st.subheader("CVEs")
 
 stopwords = setupStopwords()
@@ -327,7 +331,26 @@ tweets_df = tw.storage.panda.Tweets_df
 # tweets_df = useCSV()
 # filteredDataframe = filter_df(tweets_df)
 frequencyList = getWordFrequency(tweets_df)
+#fig = go.Figure(
+#    go.Pie(
+#    labels = frequencyList["Word"].toList(),
+#    values = frequencyList["Frequency"].toList(),
+#    hoverinfo = "Word+Frequency",
+#    textinfo = "Frequency"
+#))
 col2.text(frequencyList[:9])
 
-st.table(getCVEOutput())
+cveOut=getCVEOutput()
+st.table(cveOut)
 # run conditions
+
+if submitButtonStop:
+        col2.text(updateWordFreq(newStop, frequencyList[:9]))
+
+if submitButtonKw:
+    tw.run.Search(newKeyword)
+    tweets_df = tw.storage.panda.Tweets_df
+    frequencyList = getWordFrequency(tweets_df)
+    col3.text(frequencyList[:9])
+
+
