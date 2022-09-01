@@ -301,21 +301,23 @@ def useCSV():
 
 # start
 st.set_page_config(layout="wide")
-col1, col2, col6 = st.columns(3)
-col3 = st.columns(1)
+col1, col2, col3 = st.columns(3)
+col4,col5 = st.columns(2)
+col6,col7 = st.columns(2)
+
+
 
 st.subheader('''Cyber Trends''')
 col1.subheader("last 24 hours")
 col2.subheader("Last 7 days")
-col6.subheader("last 30 days")
+col3.subheader("last 30 days")
 
-col4, col5 = st.columns(2)
-with col4:
+with col6:
     with st.form(key="Stopword_Form"):
         newStop = st.text_input("Add new Stopword: ")
         submitButtonStop = st.form_submit_button(label="Add")
 
-with col5:
+with col7:
     with st.form(key="Keyword"):
         newKeyword = st.text_input("Search for specific Term ")
         submitButtonKw = st.form_submit_button(label="Search")
@@ -344,7 +346,7 @@ c = setupTWINT(keyword,30)
 tw.run.Search(c)
 tweets_df = tw.storage.panda.Tweets_df
 frequencyList = getWordFrequency(tweets_df)
-col6.text(frequencyList[:9])
+col3.text(frequencyList[:9])
 
 
 #7 Tage Search 
@@ -379,4 +381,4 @@ if submitButtonKw:
     tw.run.Search(c)
     tweets_df = tw.storage.panda.Tweets_df
     frequencyList = getWordFrequency(tweets_df)
-    col3.write(frequencyList[:9])
+    col4.write(frequencyList[:9])
