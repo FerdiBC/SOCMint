@@ -11,13 +11,13 @@ import certifi
 import plotly.graph_objects as go
 
 
-def setupTWINT(keyword):
+def setupTWINT(keyword,timeframe):
     # empty csv file
     f = open("twintOut.csv", "w")
     f.truncate()
     # set date
     today = datetime.date.today()
-    sinceDate = today - datetime.timedelta(days=(7))
+    sinceDate = today - datetime.timedelta(days=(timeframe))
     c = tw.Config()
     c.Lang = "en"
     c.Search = keyword
@@ -194,7 +194,7 @@ def setupStopwords():
                  "exploits", "day", "0", "-", "alleviate", "burden", "storyline",
                 "avg", "response", "amp", "deaths", "attacks", "teams", "week", "ago", "urges", "raw", "predator",
                 "flaws", "list", "adds", "xr", "ios", "agency", "us", "fest"
-    , "hacked", "safari", "pwn", "webcast", "mass", "shooting","shit","draw","cp","hackers","hacking","tag","zeroday","es","el"]
+    , "hacked", "safari", "pwn", "webcast", "mass", "shooting","shit","draw","cp","hackers","hacking","tag","zeroday__","es","el","book", "news","video","imluxu","thisisradinsky","lot"]
     stopwords.extend(itsecStop)
     return stopwords
 
@@ -303,7 +303,7 @@ col1, col2 = st.columns(2)
 col3 = st.columns(1)
 
 st.subheader('''Cyber Trends''')
-col1.subheader("chart")
+col1.subheader("last 24 hours")
 col2.subheader("Last 7 days")
 
 col4, col5 = st.columns(2)
@@ -323,7 +323,22 @@ stopwords = setupStopwords()
 newStopwords = []
 keyword = "zeroday" or "0day" or "0-day" "zero-day" or "0-days"
 
-c = setupTWINT(keyword)
+
+
+
+#24 Stunden Search
+
+c = setupTWINT(keyword,1)
+tw.run.Search(c)
+tweets_df = tw.storage.panda.Tweets_df
+col1.text(frequencyList[:9])
+
+
+
+
+#7 Tage Search 
+
+c = setupTWINT(keyword,7)
 tw.run.Search(c)
 ##marklist = list(reversed(sorted(countedCode.items(), key=lambda x: x[1])))
 tweets_df = tw.storage.panda.Tweets_df
@@ -348,7 +363,8 @@ if submitButtonStop:
         col2.text(updateWordFreq(newStop, frequencyList[:9]))
 
 if submitButtonKw:
-    tw.run.Search(newKeyword)
+    c = setupTWINT(newkeyword,7)
+    tw.run.Search(c)
     tweets_df = tw.storage.panda.Tweets_df
     frequencyList = getWordFrequency(tweets_df)
     col3.text(frequencyList[:9])
