@@ -194,7 +194,9 @@ def setupStopwords():
                  "exploits", "day", "0", "-", "alleviate", "burden", "storyline",
                 "avg", "response", "amp", "deaths", "attacks", "teams", "week", "ago", "urges", "raw", "predator",
                 "flaws", "list", "adds", "xr", "ios", "agency", "us", "fest"
-    , "hacked", "safari", "pwn", "webcast", "mass", "shooting","shit","draw","cp","hackers","hacking","tag","zeroday__","es","el","book", "news","video","imluxu","thisisradinsky","lot"]
+    , "hacked", "safari", "pwn", "webcast", "mass", "shooting","shit","draw","cp","hackers","hacking","tag","zeroday__","es","el",
+                 "book", "news","video","imluxu","thisisradinsky","lot","full","life","lt","teudipikanyaho","countdown","bad","wiflbaby",
+                "por","su","vulnerabilit","cuba","crew","perillamint"]
     stopwords.extend(itsecStop)
     return stopwords
 
@@ -332,7 +334,7 @@ c = setupTWINT(keyword,1)
 tw.run.Search(c)
 tweets_df = tw.storage.panda.Tweets_df
 frequencyList = getWordFrequency(tweets_df)
-col1.text(frequencyList[:9])
+col1.text(frequencyList['Word'][:9])
 
 
 
