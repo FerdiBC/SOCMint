@@ -307,6 +307,7 @@ col3 = st.columns(1)
 st.subheader('''Cyber Trends''')
 col1.subheader("last 24 hours")
 col2.subheader("Last 7 days")
+col6.subheader("last 30 days")
 
 col4, col5 = st.columns(2)
 with col4:
@@ -344,7 +345,7 @@ c = setupTWINT(keyword,30)
 tw.run.Search(c)
 tweets_df = tw.storage.panda.Tweets_df
 frequencyList = getWordFrequency(tweets_df)
-col1.text(frequencyList[:9])
+col6.text(frequencyList[:9])
 
 
 #7 Tage Search 
