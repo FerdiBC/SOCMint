@@ -194,7 +194,7 @@ def setupStopwords():
                  "exploits", "day", "0", "-", "alleviate", "burden", "storyline",
                 "avg", "response", "amp", "deaths", "attacks", "teams", "week", "ago", "urges", "raw", "predator",
                 "flaws", "list", "adds", "xr", "ios", "agency", "us", "fest"
-    , "hacked", "safari", "pwn", "webcast", "mass", "shooting","shit",]
+    , "hacked", "safari", "pwn", "webcast", "mass", "shooting","shit","draw","cp","hackers","hacking","tag","zeroday","es","el"]
     stopwords.extend(itsecStop)
     return stopwords
 
