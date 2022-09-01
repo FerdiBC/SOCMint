@@ -379,4 +379,4 @@ if submitButtonKw:
     tw.run.Search(c)
     tweets_df = tw.storage.panda.Tweets_df
     frequencyList = getWordFrequency(tweets_df)
-    col3.text(frequencyList[:9])
+    col3.write(frequencyList[:9])
