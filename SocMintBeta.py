@@ -301,7 +301,7 @@ def useCSV():
 
 # start
 st.set_page_config(layout="wide")
-col1, col2 = st.columns(2)
+col1, col2, col6 = st.columns(3)
 col3 = st.columns(1)
 
 st.subheader('''Cyber Trends''')
@@ -337,6 +337,14 @@ frequencyList = getWordFrequency(tweets_df)
 col1.text(frequencyList[:9])
 
 
+
+#30 Tage Search
+
+c = setupTWINT(keyword,30)
+tw.run.Search(c)
+tweets_df = tw.storage.panda.Tweets_df
+frequencyList = getWordFrequency(tweets_df)
+col1.text(frequencyList[:9])
 
 
 #7 Tage Search 
