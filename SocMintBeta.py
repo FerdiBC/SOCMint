@@ -314,27 +314,18 @@ with col4:
     with st.form(key="Stopword_Form"):
         newStop = st.text_input("Add new Stopword: ")
         submitButtonStop = st.form_submit_button(label="Add")
-if submitButtonStop:
-        col2.text(updateWordFreq(newStop, frequencyList[:9]))
 
 with col5:
     with st.form(key="Keyword"):
         newKeyword = st.text_input("Search for specific Term ")
         submitButtonKw = st.form_submit_button(label="Search")
-if submitButtonKw:
-    c = setupTWINT(newKeyword,7)
-    tw.run.Search(c)
-    tweets_df = tw.storage.panda.Tweets_df
-    frequencyList = getWordFrequency(tweets_df)
-    col3.text(frequencyList[:9])
+        
 
 st.subheader("CVEs")
 
 stopwords = setupStopwords()
 newStopwords = []
 keyword = "zeroday" or "0day" or "0-day" "zero-day" or "0-days" or "cve"
-
-
 
 
 #24 Stunden Search
@@ -380,3 +371,12 @@ st.table(cveOut)
 # run conditions
 
 
+if submitButtonStop:
+    col2.text(updateWordFreq(newStop, frequencyList[:9]))
+
+if submitButtonKw:
+    c = setupTWINT(newKeyword,7)
+    tw.run.Search(c)
+    tweets_df = tw.storage.panda.Tweets_df
+    frequencyList = getWordFrequency(tweets_df)
+    col3.text(frequencyList[:9])
