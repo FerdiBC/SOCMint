@@ -333,7 +333,7 @@ keyword = "zeroday" or "0day" or "0-day" "zero-day" or "0-days"
 c = setupTWINT(keyword,1)
 tw.run.Search(c)
 tweets_df = tw.storage.panda.Tweets_df
-frequencyList = getWordFrequency(tweets_df)['Word']
+frequencyList = getWordFrequency(tweets_df)
 col1.text(frequencyList[:9])
 
 
