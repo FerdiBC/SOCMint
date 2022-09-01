@@ -319,6 +319,12 @@ with col5:
     with st.form(key="Keyword"):
         newKeyword = st.text_input("Search for specific Term ")
         submitButtonKw = st.form_submit_button(label="Search")
+    if submitButtonKw:
+        c = setupTWINT(newkeyword,7)
+        tw.run.Search(c)
+        tweets_df = tw.storage.panda.Tweets_df
+        frequencyList = getWordFrequency(tweets_df)
+        col3.text(frequencyList[:9])
 
 st.subheader("CVEs")
 
@@ -374,11 +380,5 @@ st.table(cveOut)
 if submitButtonStop:
         col2.text(updateWordFreq(newStop, frequencyList[:9]))
 
-if submitButtonKw:
-    c = setupTWINT(newkeyword,7)
-    tw.run.Search(c)
-    tweets_df = tw.storage.panda.Tweets_df
-    frequencyList = getWordFrequency(tweets_df)
-    col3.text(frequencyList[:9])
 
 
