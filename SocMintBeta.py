@@ -167,7 +167,7 @@ def setupStopwords():
                  "agnostic", "intelligence", "precrime", "domain", "siem", "code", "code", "join", "anonymous", "kako",
                  "patch tuesday",
                  "hacktivist", "exploit", "predicted", "https", "http", "near", "youtube", "critical", "people",
-                 "google",
+                 "google",,"___tinyjoong","god","hate","month",
                  "want", "last", "data", "organisation", "organization", "phishing", "habib rizieq", "habib", "rizieq",
                  "cybersecurity",
                  "malicious", "cybercrime", "domains", "netsec", "come", "ransomware", "tech", "malware", "make",
