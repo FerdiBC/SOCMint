@@ -328,7 +328,7 @@ st.subheader("CVEs")
 
 stopwords = setupStopwords()
 newStopwords = []
-keyword = "zeroday" or "0day" or "0-day" "zero-day" or "0-days" or "cve" or "hacker" or "hackers"
+keyword = ("actively" and "exploiting") or "zeroday" or "0day" or "0-day" "zero-day" or "0-days" or "cve" or "hacker" or "hackers"
 
 
 #24 Stunden Search
