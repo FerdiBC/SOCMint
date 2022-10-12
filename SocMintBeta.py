@@ -196,7 +196,8 @@ def setupStopwords():
                 "flaws", "list", "adds", "xr", "ios", "agency", "us", "fest"
     , "hacked", "safari", "pwn", "webcast", "mass", "shooting","shit","draw","cp","hackers","hacking","tag","zeroday__","es","el",
                  "book", "news","video","imluxu","thisisradinsky","lot","full","life","lt","teudipikanyaho","countdown","bad","wiflbaby",
-                "por","su","vulnerabilit","cuba","crew","perillamint","fox","steal","bitcoin"]
+                "por","su","vulnerabilit","cuba","crew","perillamint","fox","steal","bitcoin","email","weeks","row","verbesserter","workaround","lcke","server","michigan"
+                ,"ann","inbox","superpowers"]
     stopwords.extend(itsecStop)
     return stopwords
 
@@ -327,7 +328,7 @@ st.subheader("CVEs")
 
 stopwords = setupStopwords()
 newStopwords = []
-keyword = "zeroday" or "0day" or "0-day" "zero-day" or "0-days" or "cve"
+keyword = "zeroday" or "0day" or "0-day" "zero-day" or "0-days" or "cve" or "hacker" or "hackers"
 
 
 #24 Stunden Search
